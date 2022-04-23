@@ -119,7 +119,7 @@ public class Labyrinth {
     }
 
     public void showStack(){
-        System.out.println("caminho até a saida:");
+        System.out.println("Cordenadas até a saida:");
         for (Object item: stackCordinate) {
             System.out.println(item.toString());
         }
