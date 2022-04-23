@@ -19,14 +19,18 @@ public class Labyrinth {
         this.entry = searchEntryorExit(this.laby,"E");
         this.exit = searchEntryorExit(this.laby, "S");
 
-        this.currentPosition = entry;
-        System.out.println(laby[currentPosition.line][currentPosition.col]);
-        stackCordinate.push(entry.retriveCordinate());
-        stackMove.push("Entrada");
 
-        while (laby[currentPosition.line][currentPosition.col] != "S"){
-            movePosition(this.currentPosition);
+        this.currentPosition = entry;
+
+        stackMove.push("Entrada");
+        stackCordinate.push(entry.retriveCordinate());
+
+
+
+        while (!laby[currentPosition.line][currentPosition.col].equals("S")){
+            movePosition(currentPosition);
         }
+
         showStack();
 
     }
@@ -44,25 +48,33 @@ public class Labyrinth {
 
 
        if(Objects.equals(laby[positionUp.line][positionUp.col], " ") || Objects.equals(laby[positionUp.line][positionUp.col], "S")){
-           laby[positionUp.line][positionUp.col] = "=";
+           if(!Objects.equals(laby[positionUp.line][positionUp.col], "S")){
+               laby[positionUp.line][positionUp.col] = "=";
+           }
            this.currentPosition = positionUp;
            stackMove.push("Moved Up");
            stackCordinate.push(positionUp.retriveCordinate());
            
        } else if (Objects.equals(laby[positionRight.line][positionRight.col], " ") || Objects.equals(laby[positionRight.line][positionRight.col], "S")) {
-           laby[positionRight.line][positionRight.col] = "=";
+           if(!Objects.equals(laby[positionRight.line][positionRight.col], "S")){
+               laby[positionRight.line][positionRight.col] = "=";
+           }
            this.currentPosition = positionRight;
            stackMove.push("Moved Right");
            stackCordinate.push(positionRight.retriveCordinate());
            
        } else if (Objects.equals(laby[positionDown.line][positionDown.col], " ") || Objects.equals(laby[positionDown.line][positionDown.col], "S")) {
-           laby[positionDown.line][positionDown.col] = "=";
+           if (!Objects.equals(laby[positionDown.line][positionDown.col], "S")){
+               laby[positionDown.line][positionDown.col] = "=";
+           }
            this.currentPosition = positionDown;
            stackMove.push("Moved Down");
            stackCordinate.push(positionDown.retriveCordinate());
 
        } else if (Objects.equals(laby[positionLeft.line][positionLeft.col], " ") || Objects.equals(laby[positionLeft.line][positionLeft.col], "S")) {
-           laby[positionLeft.line][positionLeft.col] = "=";
+           if (!Objects.equals(laby[positionLeft.line][positionLeft.col], "S")){
+               laby[positionLeft.line][positionLeft.col] = "=";
+           }
            this.currentPosition = positionLeft;
            stackMove.push("Moved left");
            stackCordinate.push(positionLeft.retriveCordinate());
@@ -107,6 +119,7 @@ public class Labyrinth {
     }
 
     public void showStack(){
+        System.out.println("caminho até a saida:");
         for (Object item: stackCordinate) {
             System.out.println(item.toString());
         }
